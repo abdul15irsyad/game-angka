@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Game Angka</title>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+		<style type="text/css">
+			body{
+				background-color: #212121;
+			}
+			.container{
+				/*padding: 20px 100px;*/
+				color: #fff;
+			}
+			.container a{
+				text-decoration: none;
+				outline: none;
+			}
+			.lg-header h1{
+				color: #fff;
+				cursor: pointer;
+			}
+			.lg-header h1:hover{
+				color: #fff47d;
+			}
+			.sm-header{
+				margin: 20px 0px;
+			}
+			.page .row{
+				width: 100%;
+			}
+			.btn{
+				cursor: pointer;
+				outline: none;
+			}
+			.btn-start{
+				margin: 0 auto;
+				border-radius: 50px;
+				padding: 15px 100px;
+				background-color: #212121;
+				border: 2px solid #449d44;
+				color: #449d44;
+				font-weight: bold;
+				font-size: 130%;
+			}
+			.btn-start:hover{
+				color: #fff;
+				background-color: #449d44;
+			}
+			.row-table{
+				margin: 30px 0px;
+			}
+			table thead th{
+				text-align: center;
+			}
+			table tr td{
+				color: #fff;
+				text-align: center;
+			}
+			.table-angka,.row-hasil{
+				display: none;
+			}
+			.btn-ada,.btn-tidak{
+				width: 150px;
+				color: #fff;
+				padding: 12px;
+				border-radius: 50px;
+				font-family: "century gothic";
+				font-weight: bold;
+				font-size: 120%;
+			}
+			.btn-ada{
+				background-color: #212121;
+				color: #449d44;
+				border:2px solid #449d44;
+			}
+			.btn-tidak{
+				background-color: #212121;
+				color: #c5413e;
+				border: 2px solid #c5413e;
+			}
+			.btn-ada:hover{
+				background-color: #449d44;
+				color: #fff;	
+			}
+			.btn-tidak:hover{
+				background-color: #c5413e;
+				color: #fff;
+			}
+			.mulai-lagi{
+				margin: 30px auto;
+			}
+			.row-hasil h3{
+				margin: 0 auto;
+				text-align: center;
+			}
+			.row-hasil .hasil-angka{
+				font-size: 150px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container lead">
+			<div class="lg-header row">
+				<a href=""><h1 class="title">Game Angka</h1></a>
+			</div>
+			<div class="sm-header row">
+				<p>&emsp;&emsp;Selamat datang di Game Angka, sebelum memulai permainan pikirkan angka dari 1 sampai 100 dan ingat angka tersebut selama permainan berlangsung. Jika sudah siap, maka klik mulai.</p>
+			</div>
+			<div class="page row">
+				<div class="row row-start"><button class="btn btn-start">Mulai</button></div>
+				<div class="row row-table">
+					<table class="table table-dark table-angka">
+						<thead>
+							<th colspan="2">Apa angka anda ada dibawah ?</th>
+						</thead>
+						<tbody>
+							<tr class="tampil-angka">
+								<td><button class="btn btn-ada btn-result">Ada</button></td>
+								<td><button class="btn btn-tidak btn-result">Tidak</button></td>
+							</tr>
+							<!-- <tr class="result"></tr> -->
+						</tbody>
+					</table>
+					<div class="row row-hasil">
+						<div class="row">
+							<div class="col">
+								<h3 class="hasil-text"></h3>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<h3 class="hasil-angka"></h3>
+							</div>
+						</div>
+						<div class="row mulai-lagi">
+							<button class="btn btn-start start-again">Mulai Lagi</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var tampil=1, nilai=0;
+			$(".btn-start").click(function(){
+				$(this).hide();
+				tampil=1;
+				nilai=0;
+				// $(".result").html("<td colspan='2'>"+nilai+"</td>");
+				$(".angka").remove();
+				$(".hasil-text").empty();
+				$(".hasil-angka").empty();
+				$(".table-angka").show();
+				for(var ke=1;ke<=64;ke=ke*2){
+					var text="", kelas="";
+					for(var l=ke,n=1;l<=100;l+=ke){
+						for(var m=1;m<=ke&&l<=100;m++,l++,n++){
+							text+=l+"&emsp;";
+							if(n%20==0){
+							 	text+="<br>";
+							}
+						}
+					}
+					$(".tampil-angka").before("<tr class='angka ke-"+ke+"'><td colspan='2'><p>"+text+"</p></td></tr>");
+					$(".angka").hide();
+					$(".ke-"+tampil+"").show();
+				}
+			});
+			$(".btn-ada").click(function(){
+				nilai+=tampil;
+				// $(".result").html("<td colspan='2'>"+nilai+"</td>");
+			});
+			$(".btn-result").click(function(){
+				tampil*=2;
+				$(".angka").hide();
+				$(".ke-"+tampil+"").show();
+				if (tampil>64) {
+					$(".table-angka").hide();
+					if(nilai>100||nilai==0){
+						$(".row-hasil").show();
+						$(".hasil-text").text("Angka anda tidak berada antara 1 sampai 100");
+						$(".start-again").show();
+					}else{
+						$(".row-hasil").show();
+						$(".hasil-text").text("Angka anda adalah");
+						$(".hasil-angka").html(nilai);
+						$(".start-again").show();
+					}
+				}
+			});
+		});
+	</script>
+</html>
