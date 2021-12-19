@@ -1,5 +1,9 @@
-# game-angka
+# Game Angka
 
-game abal2an, but funny
+![Game Angka](https://abdul15irsyad.github.io/game-angka/assets/img/ss-game-angka.jpeg)
 
-Try it [Game Angka](https://abdul15irsyad.github.io/game-angka)
+Selamat datang di Game Angka, sebelum memulai permainan pikirkan angka dari 1 sampai 100 dan ingat angka tersebut selama permainan berlangsung.
+
+[Game Angka](https://abdul15irsyad.github.io/game-angka)
+
+Enjoy 😀
