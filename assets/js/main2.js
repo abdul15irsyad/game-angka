@@ -9,6 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
         [64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100],
     ]
 
+    let pageNumberWrapper = [
+        document.createElement('div'),
+        document.createElement('div'),
+        document.createElement('div'),
+        document.createElement('div'),
+        document.createElement('div'),
+        document.createElement('div'),
+        document.createElement('div'),
+    ]
+
     let number = 0, step = 0, totalSteps = 7
 
     let description = document.querySelector('.description')
@@ -24,6 +34,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let resultNumber = result.querySelector('.result-number')
     let error = document.querySelector('.error')
     let btnRestarts = document.querySelectorAll('.btn-restart')
+
+    // create page number wrapper and insert into list number wrapper
+    for (let [index, listNumber] of listNumbers.entries()) {
+        for (let numberItem of listNumber) {
+            let numberItemContainer = document.createElement('div')
+            numberItemContainer.classList.add('list-number-item')
+            numberItemContainer.textContent = numberItem
+            pageNumberWrapper[index].classList.add('page-number-wrapper')
+            pageNumberWrapper[index].classList.add('fade-in')
+            pageNumberWrapper[index].appendChild(numberItemContainer)
+            listNumberWrapper.appendChild(pageNumberWrapper[index])
+        }
+    }
 
     btnStart.addEventListener('click', async function () {
         description.style.display = 'none'
@@ -57,7 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     let doStep = async step => {
-        clearListNumberWrapper()
+        let page = step - 1
+        let beforePage = page - 1
+        if (beforePage >= 0) {
+            hidePageNumber(beforePage)
+        }
         if (step <= totalSteps) {
             await showListNumber(step)
         } else {
@@ -65,17 +92,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    let showListNumber = async step => {
-        for await (let numberItem of listNumbers[step - 1]) {
-            let numberItemContainer = document.createElement('div')
-            numberItemContainer.classList.add('list-number-item')
-            numberItemContainer.textContent = numberItem
-            listNumberWrapper.appendChild(numberItemContainer)
-        }
+    let showListNumber = step => {
+        pageNumberWrapper[step - 1].style.display = 'block'
     }
 
-    let clearListNumberWrapper = () => {
-        listNumberWrapper.innerHTML = ''
+    let hidePageNumber = page => {
+        pageNumberWrapper[page].style.display = 'none'
     }
 
     let addResult = (step, exist) => {
@@ -84,16 +106,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let showResult = () => {
         question.style.display = 'none'
-        loading.style.display = 'block'
-        setTimeout(() => {
-            loading.style.display = 'none'
-            if (number >= 1 && number <= 100) {
-                result.style.display = 'block'
-                resultNumber.textContent = number
-            } else {
-                error.style.display = 'block'
-            }
-        }, 1000)
+        if (number >= 1 && number <= 100) {
+            result.style.display = 'block'
+            resultNumber.textContent = number
+        } else {
+            error.style.display = 'block'
+        }
     }
 
 })

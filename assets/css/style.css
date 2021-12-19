@@ -1,3 +1,7 @@
+:root{
+    --animation-time: 1s;
+}
+
 :focus,:active,:hover{
     box-shadow: none !important;
     outline: none !important;
@@ -16,7 +20,11 @@ a{
 }
 
 .content .question{
-    display: none;    
+    display: none;
+}
+
+.content .question .list-number-wrapper .page-number-wrapper{
+    display: none;
 }
 
 .content .question .list-number-wrapper .list-number-item, .result .result-number{
@@ -57,6 +65,15 @@ a{
     display: none;
 }
 
+.fade-in{
+    animation: fadeIn var(--animation-time);
+    -webkit-animation: fadeIn var(--animation-time);
+    -moz-animation: fadeIn var(--animation-time);
+    -o-animation: fadeIn var(--animation-time);
+    -ms-animation: fadeIn var(--animation-time);
+}
+
+/* mobile */
 @media only screen and (max-width:767px){
     .content .question .list-number-wrapper .list-number-item{
         font-size: 1em;
@@ -64,4 +81,25 @@ a{
     .result .result-number{
         font-size: 3em;
     }
+    .loading img{
+        width: 5em;
+    }
 }
+
+/* tablet */
+@media only screen and (min-width:768px) and (max-width:991px){
+    .loading img{
+        width: 5em;
+    }
+}
+/* dekstop */
+@media only screen and (min-width:992px){
+    .loading img{
+        width: 5em;
+    }
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+ } 
