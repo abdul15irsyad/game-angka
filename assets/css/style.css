@@ -1,0 +1,67 @@
+:focus,:active,:hover{
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+a{
+    text-decoration: none;
+}
+
+.header .site-logo{
+    width: 2em;
+}
+
+.header .title .author{
+    font-size: .6em;
+}
+
+.content .question{
+    display: none;    
+}
+
+.content .question .list-number-wrapper .list-number-item, .result .result-number{
+    background-color: var(--bs-light);
+    border: 1px dashed var(--bs-secondary);
+    border-radius: 5px;
+    color: var(--bs-dark);
+    margin: .25em;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25em;
+    width: 2em;
+    height: 2em;
+}
+
+.content .question .list-number-wrapper .list-number-item:hover{
+    box-shadow: 0px 0px 5px rgb(0 0 0 / .3) !important;
+}
+
+.result{
+    display: none;
+}
+
+.result .result-number{
+    border: 3px dashed var(--bs-secondary);
+    border-radius: 15px;
+    margin: 20px;
+    font-size: 5em;
+    line-height: 1;
+}
+
+.error{
+    display: none;
+}
+
+.loading{
+    display: none;
+}
+
+@media only screen and (max-width:767px){
+    .content .question .list-number-wrapper .list-number-item{
+        font-size: 1em;
+    }
+    .result .result-number{
+        font-size: 3em;
+    }
+}
